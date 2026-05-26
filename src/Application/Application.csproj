@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Abstractions\" />
+      <Folder Include="Contracts\Ahp\" />
+      <Folder Include="Contracts\Plants\Traits\Climate\" />
+      <Folder Include="Contracts\Plants\Traits\Crown\" />
+      <Folder Include="Contracts\Plants\Traits\Ecological\" />
+      <Folder Include="Contracts\Plants\Traits\Leaf\" />
+      <Folder Include="Contracts\Plants\Traits\Root\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: "bio_db"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "admin"
+    ports:
+      - "5432:5432"
+    volumes:
+      - bio_data:/var/lib/postgresql
+  migrate:
+    image: liquibase/liquibase:4.23
+    working_dir: /liquibase/changelog
+    volumes:
+      - ../Migrations/changelog:/liquibase/changelog
+    command: >
+      liquibase --changeLogFile=0.0.1_init.xml --url=jdbc:postgresql://db:5432/bio_db --username=admin --password=admin  update
+
+volumes:
+  bio_data:
+    driver: local
