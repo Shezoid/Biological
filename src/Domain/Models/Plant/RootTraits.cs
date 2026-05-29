@@ -11,6 +11,4 @@ public partial record RootTraits(
     [RequiredValue] double WaterAbsorption,
     [RequiredValue] double WaterStorage,
     [RequiredValue] double PhytoExtraction,
-    [RequiredValue] double PhytoStimulation)
-{
-}
+    [RequiredValue] double PhytoStimulation);

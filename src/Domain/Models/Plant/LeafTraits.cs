@@ -14,6 +14,5 @@ public partial record LeafTraits(
     [RequiredValue] double StomataDensity,
     [RequiredValue] double WaterContent,
     [RequiredValue] double PhotosyntheticPlasticity,
-    [RequiredValue] double Reflectivity)
-{
-}
+    [RequiredValue] double Reflectivity,
+    [RequiredValue] double Lightness);

@@ -8,6 +8,4 @@ public partial record CrownTraits(
     [RequiredValue] double CoverageDegree,
     [RequiredValue] double Multilayer,
     [RequiredValue] double GreenMass,
-    [RequiredValue] double Branching)
-{
-}
+    [RequiredValue] double Branching);

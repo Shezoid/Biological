@@ -4,10 +4,13 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\Generated</CompilerGeneratedFilesOutputPath>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="SourceKit.Generators.Builder.Annotations" Version="1.1.59" />
+      <PackageReference Include="SourceKit.Generators.Builder" Version="1.1.29" />
+      <PackageReference Include="SourceKit.Generators.Builder.Annotations" Version="1.1.29" />
     </ItemGroup>
 
 </Project>
