@@ -1,187 +1,110 @@
-CREATE TABLE plants
+CREATE TABLE "Plants"
 (
-    id          BIGSERIAL PRIMARY KEY,
-
-    name_ru     TEXT NOT NULL,
-
-    name_latin  TEXT NOT NULL,
-
-    plant_type  TEXT,
-
-    height_max  DOUBLE PRECISION,
-
-    growth_rate DOUBLE PRECISION,
-
-    lifespan    INTEGER,
-
-    created_at  TIMESTAMP DEFAULT NOW()
+    "Id"          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    "NameRu"      TEXT NOT NULL,
+    "NameLatin"   TEXT NOT NULL,
+    "HeightMax"   DOUBLE PRECISION NOT NULL,
+    "GrowthRate"  DOUBLE PRECISION NOT NULL,
+    "Lifespan"    INTEGER,
+    "CreatedAt"   TIMESTAMP DEFAULT NOW()
 );
 
-CREATE INDEX idx_plants_name_ru
-    ON plants (name_ru);
+CREATE INDEX "IdxPlantsNameRu"
+    ON "Plants" ("NameRu");
 
-CREATE INDEX idx_plants_name_latin
-    ON plants (name_latin);
+CREATE INDEX "IdxPlantsNameLatin"
+    ON "Plants" ("NameLatin");
 
-CREATE TABLE leaf_traits
+CREATE TABLE "LeafTraits"
 (
-    plant_id                  BIGINT PRIMARY KEY
-        REFERENCES plants (id)
+    "Id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    "PlantId" UUID NOT NULL UNIQUE
+        REFERENCES "Plants" ("Id")
             ON DELETE CASCADE,
-    leaf_area                 DOUBLE PRECISION,
-
-    leaf_thickness            DOUBLE PRECISION,
-
-    leaf_orientation          DOUBLE PRECISION
-        CHECK (leaf_orientation BETWEEN 0 AND 1),
-
-
-    leaf_density              DOUBLE PRECISION
-        CHECK (leaf_density BETWEEN 0 AND 1),
-
-    surface_texture           DOUBLE PRECISION
-        CHECK (surface_texture BETWEEN 0 AND 1),
-
-    hairiness                 DOUBLE PRECISION
-        CHECK (hairiness BETWEEN 0 AND 1),
-
-    wax                       DOUBLE PRECISION
-        CHECK (wax BETWEEN 0 AND 1),
-
-    stomata_density           DOUBLE PRECISION,
-
-    water_content             DOUBLE PRECISION,
-
-    photosynthetic_plasticity DOUBLE PRECISION
-        CHECK (photosynthetic_plasticity BETWEEN 0 AND 1),
-
-    leaf_color                DOUBLE PRECISION
-        CHECK (leaf_color BETWEEN 0 AND 1),
-
-    reflectivity              DOUBLE PRECISION
+    "LeafArea"                 DOUBLE PRECISION NOT NULL,
+    "LeafThickness"            DOUBLE PRECISION NOT NULL,
+    "LeafOrientation"          DOUBLE PRECISION NOT NULL,
+    "LeafDensity"              DOUBLE PRECISION NOT NULL,
+    "SurfaceTexture"           DOUBLE PRECISION NOT NULL,
+    "Hairiness"                DOUBLE PRECISION NOT NULL,
+    "Wax"                      DOUBLE PRECISION NOT NULL,
+    "StomataDensity"           DOUBLE PRECISION NOT NULL,
+    "WaterContent"             DOUBLE PRECISION NOT NULL,
+    "PhotosyntheticPlasticity" DOUBLE PRECISION NOT NULL,
+    "LeafLightness"                DOUBLE PRECISION NOT NULL,
+    "Reflectivity"             DOUBLE PRECISION NOT NULL
 );
 
-CREATE TABLE crown_traits
+CREATE TABLE "CrownTraits"
 (
-    plant_id        BIGINT PRIMARY KEY
-        REFERENCES plants (id)
+    "Id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    "PlantId" UUID NOT NULL UNIQUE
+        REFERENCES "Plants" ("Id")
             ON DELETE CASCADE,
-
-    crown_density   DOUBLE PRECISION
-        CHECK (crown_density BETWEEN 0 AND 1),
-
-    coverage_degree DOUBLE PRECISION,
-
-    multilayer      DOUBLE PRECISION
-        CHECK (multilayer BETWEEN 0 AND 1),
-
-    green_mass      DOUBLE PRECISION,
-
-    branching       DOUBLE PRECISION
-        CHECK (branching BETWEEN 0 AND 1)
+    "CrownDensity"   DOUBLE PRECISION NOT NULL,
+    "CoverageDegree" DOUBLE PRECISION NOT NULL,
+    "Multilayer"     DOUBLE PRECISION NOT NULL,
+    "GreenMass"      DOUBLE PRECISION NOT NULL,
+    "Branching"      DOUBLE PRECISION NOT NULL
 );
 
-CREATE TABLE root_traits
+CREATE TABLE "RootTraits"
 (
-    plant_id             BIGINT PRIMARY KEY
-        REFERENCES plants (id)
+    "Id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    "PlantId" UUID NOT NULL UNIQUE
+        REFERENCES "Plants" ("Id")
             ON DELETE CASCADE,
-
-    root_depth           DOUBLE PRECISION,
-
-    root_branching       DOUBLE PRECISION
-        CHECK (root_branching BETWEEN 0 AND 1),
-
-    root_surface_area    DOUBLE PRECISION,
-
-    rhizosphere_activity DOUBLE PRECISION
-        CHECK (rhizosphere_activity BETWEEN 0 AND 1),
-
-    water_absorption     DOUBLE PRECISION
-        CHECK (water_absorption BETWEEN 0 AND 1),
-
-    water_storage        DOUBLE PRECISION
-        CHECK (water_storage BETWEEN 0 AND 1),
-
-    phytoextraction      DOUBLE PRECISION
-        CHECK (phytoextraction BETWEEN 0 AND 1),
-
-    phytostimulation     DOUBLE PRECISION
-        CHECK (phytostimulation BETWEEN 0 AND 1)
+    "RootDepth"           DOUBLE PRECISION NOT NULL,
+    "RootBranching"       DOUBLE PRECISION NOT NULL,
+    "RootSurfaceArea"     DOUBLE PRECISION NOT NULL,
+    "RhizosphereActivity" DOUBLE PRECISION NOT NULL,
+    "WaterAbsorption"     DOUBLE PRECISION NOT NULL,
+    "WaterStorage"        DOUBLE PRECISION NOT NULL,
+    "Phytoextraction"     DOUBLE PRECISION NOT NULL,
+    "Phytostimulation"    DOUBLE PRECISION NOT NULL
 );
 
-CREATE TABLE ecological_traits
+CREATE TABLE "EcologicalTraits"
 (
-    plant_id             BIGINT PRIMARY KEY
-        REFERENCES plants (id)
+    "Id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    "PlantId" UUID NOT NULL UNIQUE
+        REFERENCES "Plants" ("Id")
             ON DELETE CASCADE,
-
-    pollution_tolerance  DOUBLE PRECISION
-        CHECK (pollution_tolerance BETWEEN 0 AND 1),
-
-    dust_capture         DOUBLE PRECISION
-        CHECK (dust_capture BETWEEN 0 AND 1),
-
-    co2_absorption       DOUBLE PRECISION,
-
-    gas_absorption       DOUBLE PRECISION
-        CHECK (gas_absorption BETWEEN 0 AND 1),
-
-    biodiversity_support DOUBLE PRECISION
-        CHECK (biodiversity_support BETWEEN 0 AND 1),
-
-    pollinator_support   DOUBLE PRECISION
-        CHECK (pollinator_support BETWEEN 0 AND 1),
-
-    food_value           DOUBLE PRECISION
-        CHECK (food_value BETWEEN 0 AND 1),
-
-    shelter_value        DOUBLE PRECISION
-        CHECK (shelter_value BETWEEN 0 AND 1)
+    "PollutionTolerance"  DOUBLE PRECISION NOT NULL,
+    "DustCapture"         DOUBLE PRECISION NOT NULL,
+    "CO2Absorption"       DOUBLE PRECISION NOT NULL,
+    "GasAbsorption"       DOUBLE PRECISION NOT NULL,
+    "BiodiversitySupport" DOUBLE PRECISION NOT NULL,
+    "PollinatorSupport"   DOUBLE PRECISION NOT NULL,
+    "FoodValue"           DOUBLE PRECISION NOT NULL,
+    "ShelterValue"        DOUBLE PRECISION NOT NULL
 );
 
-CREATE TABLE climate_traits
+CREATE TABLE "ClimateTraits"
 (
-    plant_id            BIGINT PRIMARY KEY
-        REFERENCES plants (id)
+    "Id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    "PlantId" UUID NOT NULL UNIQUE
+        REFERENCES "Plants" ("Id")
             ON DELETE CASCADE,
-
-    winter_hardiness    DOUBLE PRECISION,
-
-    humidity_adaptation DOUBLE PRECISION
-        CHECK (humidity_adaptation BETWEEN 0 AND 1),
-
-    wind_resistance     DOUBLE PRECISION
-        CHECK (wind_resistance BETWEEN 0 AND 1),
-
-    shade_tolerance     DOUBLE PRECISION
-        CHECK (shade_tolerance BETWEEN 0 AND 1),
-
-    light_requirement   DOUBLE PRECISION
+    "HumidityAdaptation" DOUBLE PRECISION NOT NULL,
+    "ShadeTolerance"     DOUBLE PRECISION NOT NULL,
+    "LightRequirement"   DOUBLE PRECISION NOT NULL
 );
 
-CREATE TABLE ahp_weights
+CREATE TABLE "AhpWeights"
 (
-    id             BIGSERIAL PRIMARY KEY,
-
-    indicator_name TEXT             NOT NULL,
-
-    factor_name    TEXT             NOT NULL,
-
-    weight         DOUBLE PRECISION NOT NULL,
-
-    CHECK (weight >= 0)
+    "Id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    "GoalType"  INT NOT NULL,
+    "FactorName" INT NOT NULL,
+    "Weight" DOUBLE PRECISION NOT NULL
+        CHECK ("Weight" >= 0)
 );
 
-CREATE TABLE environment_modifiers
+CREATE TABLE "EnvironmentModifiers"
 (
-    id              BIGSERIAL PRIMARY KEY,
-
-    condition_type  TEXT             NOT NULL,
-
-    condition_value TEXT             NOT NULL,
-
-    indicator_name  TEXT             NOT NULL,
-
-    modifier        DOUBLE PRECISION NOT NULL
+    "Id" UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    "ConditionType" INT NOT NULL,
+    "ConditionValue" DOUBLE PRECISION NOT NULL,
+    "FactorName" INT NOT NULL,
+    "Modifier" DOUBLE PRECISION NOT NULL
 );

@@ -8,4 +8,13 @@
     <changeSet id="0" author="shezoid">
         <sqlFile path="schema.sql" />
     </changeSet>
+    <changeSet id="1" author="shezoid">
+        <sqlFile path="seed_plants.sql" />
+    </changeSet>
+    <changeSet id="2" author="shezoid">
+        <sqlFile path="seed_traits.sql" />
+    </changeSet>
+    <changeSet id="3" author="shezoid">
+        <sqlFile path="seed_stuff_data.sql" />
+    </changeSet>
 </databaseChangeLog>         
